@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анимированное сердце</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            position: relative;
+        }
+        .heart {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            margin: 50px;
+            opacity: 1;
+            transition: opacity 5s;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            top: -150px;
+            left: 0;
+        }
+        .heart::after {
+            left: 150px;
+            top: 0;
+        }
+        .message {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            opacity: 1;
+        }
+        @keyframes dissolve {
+            0% { opacity: 1; transform: scale(1) rotate(-45deg); }
+            100% { opacity: 0; transform: scale(1.5) rotate(-45deg); }
+        }
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+        .scrolling-text {
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart" id="heart"></div>
+        <div class="message"><span class="scrolling-text">Дашуля, ты самое дорогое, что у меня есть</span></div>
+    </div>
+    <script>
+        window.onload = () => {
+            const heart = document.getElementById("heart");
+            setTimeout(() => {
+                heart.style.animation = "dissolve 5s forwards";
+            }, 500);
+        };
+    </script>
+</body>
+</html>
